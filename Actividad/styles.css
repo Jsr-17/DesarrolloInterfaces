@@ -1,0 +1,11 @@
+.hero {
+  height: 90vh;
+  background-image: url("./img/img1.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.nav-item {
+  font-size: small;
+  color: white;
+}
