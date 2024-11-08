@@ -49,7 +49,8 @@ h5 {
   background-image: linear-gradient(35deg, #a1052c, #0750d0);
   color: #ffffff;
 }
-.primary:hover {
+.primary:hover,
+#readMore:hover {
   background-image: linear-gradient(35deg, #880525, #0540a5);
   color: #ffffff;
 }
