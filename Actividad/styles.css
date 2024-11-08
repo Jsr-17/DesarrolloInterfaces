@@ -64,3 +64,18 @@ h5 {
 #anterior:hover {
   cursor: pointer;
 }
+small {
+  font-size: 9px;
+}
+
+.pequeña {
+  font-size: small;
+}
+.backgroudImage {
+  background-image: url("img/fondo1.jpg");
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 450px;
+}
