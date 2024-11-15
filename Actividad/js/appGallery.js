@@ -18,4 +18,5 @@ function muestraModal(elemento) {
     target: { src },
   } = elemento;
   contenedor.style.display = "none";
+  modalContainer.style.display = "block";
 }
