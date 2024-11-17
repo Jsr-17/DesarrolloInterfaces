@@ -76,3 +76,7 @@ small {
   background-position: center;
   height: 450px;
 }
+
+.cursor:hover {
+  cursor: pointer;
+}
