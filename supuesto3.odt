@@ -1,0 +1,178 @@
+
+
+
+
+
+Título: “Documentación del Proyecto - GameFusion Studios”
+
+
+	Nombre del Alumno: José Antonio Román Moreno
+	Fecha de Entrega: 18-11-2024
+
+
+
+
+-Descripción/ Subtítulo: 
+	Este documento describe en detalle el diseño, desarrollo y pruebas realizadas en el proyecto web de GameFusion Studios. Abarca las tecnologías utilizadas, las decisiones de diseño tomadas y las implementaciones técnicas que hacen que el sitio sea interactivo, responsivo y funcional para una experiencia de usuario óptima.
+
+
+
+
+
+
+
+
+
+
+
+
+2. Índice:
+
+1. Portada
+2. Índice
+3. Introducción
+4. Estructura del Proyecto
+5. Descripción de Cada Página
+5.1 Home
+5.2 About Us
+5.3 Gallery
+5.4 Blog
+5.5 Shop
+5.6 Contacts
+6. Detalles de Implementación Técnica
+6.1 Menú Sticky
+6.2 Componentes de Bootstrap
+6.3 CSS Personalizado
+6.4 JavaScript Personalizado
+7. Pruebas de Diseño Responsive y Funcionalidad
+8. Conclusión y Reflexión
+
+
+
+
+
+
+
+
+3. Introducción:
+
+El objetivo de este proyecto es desarrollar un sitio web para GameFusion Studios que sea visualmente atractivo, fácil de navegar, y completamente responsivo, utilizando tecnologías modernas como HTML5, CSS3, Bootstrap y JavaScript. El sitio tiene varias páginas clave que incluyen Home, About Us, Gallery, Blog, Shop y Contacts. El propósito principal de la web es proporcionar una plataforma interactiva y visualmente dinámica para que los usuarios conozcan más sobre la empresa, exploren el portafolio y se pongan en contacto.
+
+Las principales tecnologías utilizadas en este proyecto fueron:
+
+HTML5: Para la estructura y semántica del contenido.
+CSS3: Para la presentación visual y la implementación de un diseño atractivo.
+Bootstrap: Para la creación de una interfaz responsiva y el uso de componentes interactivos.
+JavaScript: Para funcionalidades adicionales como el contador interactivo y el manejo de eventos.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+4. Estructura del Proyecto:
+La estructura del proyecto está organizada en varias carpetas que contienen los archivos correspondientes a cada aspecto del sitio. La estructura es la siguiente:
+
+/gamefusion-studios
+    /css
+        - styles.css  (CSS personalizado)
+		- stylesGallery.css  (CSS personalizado)
+    /js
+
+        - appGallery.js  (JavaScript personalizado)
+
+        - appHome.js  (JavaScript personalizado)
+    /images
+        - img1.png
+        - img2.jpg
+        - img3.jpg
+        ...
+    /home.html
+    /about.html
+    /gallery.html
+    /blog.html
+    /shop.html
+    /contact.html
+		...
+
+
+
+
+Descripción de carpetas:
+/css: Contiene los archivos de estilos. styles.css es el archivo donde se encuentra el CSS personalizado para ajustar el tema y los componentes de Bootstrap según las necesidades del proyecto.
+/js: Contiene el JavaScript necesario para hacer que el sitio sea interactivo.
+/images: Guarda todas las imágenes utilizadas en el sitio, como logos, fotos de la galería, imágenes del blog, etc.
+
+5. Descripción de Cada Página:
+5.1 Home:
+La página de inicio es la puerta de entrada del sitio. Aquí se destacan varios elementos:
+Carrusel de imágenes: Un slider que muestra las últimas novedades de GameFusion Studios.
+Contador interactivo: Muestra estadísticas sobre la cantidad de proyectos realizados, clientes satisfechos, etc.
+Cards: Tarjetas que presentan los principales servicios de la empresa Estas tarjetas están diseñadas para ser atractivas y fáciles de interactuar.
+5.2 About Us:
+La página "About Us" tiene como objetivo informar a los usuarios sobre la historia y misión de GameFusion Studios.
+Secciones adicionales: Un espacio donde se presentan los miembros del equipo con sus fotos y roles dentro de la empresa.
+5.3 Gallery:
+La galería muestra los trabajos previos de GameFusion Studios.
+Diseño de la galería: Las imágenes se presentan en una cuadrícula responsive que se adapta a diferentes tamaños de pantalla.
+Efectos hover: Al pasar el ratón sobre una imagen, se amplía o muestra una breve descripción del proyecto.
+Modal: Al hacer clic en una imagen, se abre un modal que muestra una versión ampliada de la imagen y más detalles sobre el proyecto.
+5.4 Blog:
+La página de blog muestra artículos recientes sobre tendencias en diseño y desarrollo de videojuegos.
+Entradas: Cada entrada está organizada con un título, fecha, imagen destacada y un resumen.
+Sidebar: En el lateral, los usuarios pueden ver entradas recientes y categorías.
+
+5.5 Shop:
+La página de la tienda presenta los productos de GameFusion Studios, como merchandising o licencias de software.
+Listado de productos: Cada producto está presentado con su imagen, nombre, descripción corta y precio.
+Botones de compra: Botones para añadir productos al carrito o hacer una compra directa.
+5.6 Contacts:
+En esta página los usuarios pueden ponerse en contacto con GameFusion Studios.
+Formulario de contacto: Un formulario con campos para nombre, correo electrónico, mensaje y un botón de envío.
+Mapa de ubicación: Un mapa interactivo que muestra la ubicación de la oficina.
+Redes sociales: Iconos de redes sociales (Facebook, Twitter, Instagram) que permiten a los usuarios conectarse con la empresa en diversas plataformas.
+6. Detalles de Implementación Técnica:
+6.1 Menú Sticky:
+El menú de navegación se mantiene visible en la parte superior de la página mientras el usuario se desplaza. Esto se logra utilizando una combinación de CSS (position: sticky) y un pequeño script en JavaScript para ajustar el estilo al hacer scroll.
+6.2 Componentes de Bootstrap:
+
+A continuación, una tabla que resume los componentes de Bootstrap utilizados:
+Componente
+Descripción
+Carrusel (Carousel)
+Para mostrar imágenes de manera interactiva.
+Modal
+Para mostrar imágenes ampliadas en la galería.
+Navbar
+Menú de navegación sticky.
+Cards
+Tarjetas interactivas para los servicios y productos.
+6.3 CSS Personalizado:
+Se han realizado varias personalizaciones en CSS:
+Efectos Hover: Para los enlaces y las tarjetas, se implementaron efectos visuales de hover para hacer la interacción más atractiva.
+Colores: Se ajustaron los colores de fondo, botones y textos para que se alineen con la identidad de la marca de GameFusion Studios.
+Tipografía: Se seleccionó una fuente moderna y legible, con ajustes en el tamaño para mejorar la legibilidad.
+
+7. Pruebas de Diseño Responsive y Funcionalidad:
+Se realizaron pruebas exhaustivas en diferentes dispositivos (móviles, tabletas y PC) para asegurar que el sitio se vea correctamente. Algunas de las pruebas incluyen:
+Pruebas de tamaño de pantalla: Se verificó que todos los elementos se adaptaran correctamente a diferentes resoluciones.
+Ajustes: Se hicieron correcciones en la visualización de los menús en pantallas más pequeñas y se optimizó la carga de imágenes.
+
+
+
+
+
+8. Conclusión y Reflexión:
+Este proyecto ha sido una excelente oportunidad para aplicar mis conocimientos en desarrollo web utilizando tecnologías modernas como HTML, CSS, Bootstrap y JavaScript. A través de este proyecto, aprendí a trabajar con un diseño responsivo, implementé componentes interactivos y optimicé la experiencia del usuario.
+Desafíos: Uno de los principales desafíos fue lograr que el sitio se viera perfectamente en dispositivos móviles, especialmente con los efectos hover y los menús.
+Mejoras Futuras: En futuras versiones, podría implementar una función de tienda en línea completa con un sistema de pago, o agregar más interactividad al blog.
+
