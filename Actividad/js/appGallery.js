@@ -13,10 +13,29 @@ contenedorImagenes.forEach((el) =>
   el.addEventListener("click", (el) => muestraModal(el))
 );
 
-function muestraModal(elemento) {
+const muestraModal = (elemento) => {
   const {
     target: { src },
   } = elemento;
   contenedor.style.display = "none";
+<<<<<<< HEAD
   modalContainer.style.display = "block";
 }
+=======
+  let salir = document.createElement("div");
+  salir.textContent = "x";
+  salir.classList.add("cursor");
+  salir.style.fontSize = "45px";
+  let img = document.createElement("img");
+  img.src = src;
+  img.classList.add("img-fluid", "mx-3");
+  modalContainer.append(img, salir);
+  const btn = document.querySelector(".cursor");
+  btn.addEventListener("click", () => cierraModal());
+};
+
+const cierraModal = () => {
+  contenedor.style.display = "block";
+  modalContainer.innerHTML = "";
+};
+>>>>>>> 26ef8e632f508dfbcb0c0cc5f80b21ff56a2d71c
