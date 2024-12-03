@@ -87,4 +87,5 @@ small {
 
 .categorias {
   display: none;
+  transition: all ease-in-out 1s;
 }
