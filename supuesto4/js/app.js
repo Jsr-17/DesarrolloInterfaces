@@ -289,14 +289,19 @@ selectCategoria.addEventListener("change", () => {
   }
 });
 
-//funcion que filtra
+//funcion que filtra por categorias
 const filtraPorCategoria = (categoria) => {
+  //resetea el contenido del contenedor html
   contenedor.innerHTML = "";
+
   const { juegos } = datos[tiendaActual];
 
   switch (categoria) {
+    //Caso en el que los juegos son de accion
     case "accion":
+      //recorro los juegos
       juegos.forEach(
+        //desestructuro cada juego
         ({
           CalificacionDeTrato,
           Titulo,
@@ -306,9 +311,11 @@ const filtraPorCategoria = (categoria) => {
           Imagen,
           categorias,
         }) => {
+          //filtro cada juego por su categoria
           const elementoAccion = categorias.indexOf("accion");
 
           if (elementoAccion != -1) {
+            //funcion que rellena el html con los datos del json filtrado
             rellenaHtml(
               CalificacionDeTrato,
               Titulo,
@@ -322,8 +329,10 @@ const filtraPorCategoria = (categoria) => {
         }
       );
       break;
+    //caso que el juego sea de rol
     case "rol":
       juegos.forEach(
+        //desestructuro los juegos y los recorro
         ({
           CalificacionDeTrato,
           Titulo,
@@ -333,9 +342,11 @@ const filtraPorCategoria = (categoria) => {
           Imagen,
           categorias,
         }) => {
+          // filtro por la categoria rol
           const elementoAccion = categorias.indexOf("rol");
 
           if (elementoAccion != -1) {
+            //rellena html de forma dinamica con los datos del json
             rellenaHtml(
               CalificacionDeTrato,
               Titulo,
@@ -349,8 +360,10 @@ const filtraPorCategoria = (categoria) => {
         }
       );
       break;
+    //filstro por la categoria de shooter
     case "shooter":
       juegos.forEach(
+        //desestructuro cada elemento del json
         ({
           CalificacionDeTrato,
           Titulo,
@@ -360,9 +373,11 @@ const filtraPorCategoria = (categoria) => {
           Imagen,
           categorias,
         }) => {
+          //filtro por la categoria shooter
           const elementoAccion = categorias.indexOf("shooter");
 
           if (elementoAccion != -1) {
+            //rellena el html con los datos delk json
             rellenaHtml(
               CalificacionDeTrato,
               Titulo,
@@ -376,7 +391,9 @@ const filtraPorCategoria = (categoria) => {
         }
       );
       break;
+    //caso de que el juego sea de peleas
     case "peleas":
+      //Desestructura el contenido del juego y lo coloca de manera dinamica en el html
       juegos.forEach(
         ({
           CalificacionDeTrato,
@@ -387,6 +404,7 @@ const filtraPorCategoria = (categoria) => {
           Imagen,
           categorias,
         }) => {
+          //filtra los elementos por categoria de peleas
           const elementoAccion = categorias.indexOf("peleas");
 
           if (elementoAccion != -1) {
@@ -403,8 +421,11 @@ const filtraPorCategoria = (categoria) => {
         }
       );
       break;
+    //caso de que el juego sea de estrategia
     case "estrategia":
+      //recorre cada elemento de los juegos
       juegos.forEach(
+        //desestructura cada elemento y rellena el contendio del html de forma dinamica
         ({
           CalificacionDeTrato,
           Titulo,
@@ -414,6 +435,7 @@ const filtraPorCategoria = (categoria) => {
           Imagen,
           categorias,
         }) => {
+          //Filtra por categoria de estrategia
           const elementoAccion = categorias.indexOf("estrategia");
 
           if (elementoAccion != -1) {
@@ -435,12 +457,23 @@ const filtraPorCategoria = (categoria) => {
       break;
   }
 };
+
+//funcion que se va a encargar de filtrar por lo restante
+
+//tipo se va a referir si es por precio o categoria
+//modo se va a encargar si es de modo ascendente o ascendente
+
 const filtradoRestante = (tipo, modo) => {
+  //resetea el html
   contenedor.innerHTML = "";
+  //desestructura los datos de la tienda que este en el ambito global
   const { juegos } = datos[tiendaActual];
+
+  //array que va a ser ordenado conforme a los datos que reciba de la variable datos global
   let arrayOrdenado = [];
 
   juegos.forEach(
+    //desestructura cada elemento de cada juego
     ({
       CalificacionDeTrato,
       Titulo,
@@ -450,6 +483,7 @@ const filtradoRestante = (tipo, modo) => {
       Imagen,
       categorias,
     }) => {
+      //Creo un nuevo objeto literal con cada juego y con los valores numericos para hacer las operaciones sin error
       const juego = {
         cal: parseInt(CalificacionDeTrato),
         tit: Titulo,
@@ -459,12 +493,16 @@ const filtradoRestante = (tipo, modo) => {
         img: Imagen,
         cat: categorias,
       };
+      //meto dentro el array de los juegos
       arrayOrdenado = [juego, ...arrayOrdenado];
 
       switch (tipo) {
+        //En el caso de que sea precio
         case "precio":
           switch (modo) {
+            //en el caso de que sea de forma ascendente
             case "asc":
+              //mediante el algoritmo de bubble sort ordeno de manera dinamica los datos
               for (let i = 0; i < arrayOrdenado.length; i++) {
                 for (let j = 0; j < arrayOrdenado.length - i - 1; j++) {
                   if (arrayOrdenado[j].prec > arrayOrdenado[j + 1].prec) {
@@ -476,7 +514,9 @@ const filtradoRestante = (tipo, modo) => {
               }
 
               break;
+            //En el caso de que sea descendente
             case "desc":
+              //mediante el algoritmo de bubble sort ordeno de manera dinamica los datos
               for (let i = 0; i < arrayOrdenado.length; i++) {
                 for (let j = 0; j < arrayOrdenado.length - i - 1; j++) {
                   if (arrayOrdenado[j].prec < arrayOrdenado[j + 1].prec) {
@@ -492,9 +532,14 @@ const filtradoRestante = (tipo, modo) => {
           }
 
           break;
+        //En el caso de que sea por calificaciones
         case "cal":
           switch (modo) {
+            //En el caso de que sea ascendente
+
             case "asc":
+              //mediante el algoritmo de bubble sort ordeno de manera dinamica los datos
+
               for (let i = 0; i < arrayOrdenado.length; i++) {
                 for (let j = 0; j < arrayOrdenado.length - i - 1; j++) {
                   if (arrayOrdenado[j].cal > arrayOrdenado[j + 1].cal) {
@@ -506,7 +551,11 @@ const filtradoRestante = (tipo, modo) => {
               }
 
               break;
+            //En el caso de que sea descendente
+
             case "desc":
+              //mediante el algoritmo de bubble sort ordeno de manera dinamica los datos
+
               for (let i = 0; i < arrayOrdenado.length; i++) {
                 for (let j = 0; j < arrayOrdenado.length - i - 1; j++) {
                   if (arrayOrdenado[j].cal < arrayOrdenado[j + 1].cal) {
@@ -526,12 +575,15 @@ const filtradoRestante = (tipo, modo) => {
       }
     }
   );
+  //Por ultimo recorre el array creado para meter dentro del html los datos del json ordenado segun el filtro
   arrayOrdenado.forEach(({ cal, tit, prec, precRej, punt, img, cat }) =>
     rellenaHtml(cal, tit, prec, precRej, punt, img, cat)
   );
 };
 
+//funcion que se encarga de rellenar de manera dinamica el html
 const rellenaHtml = (cal, tit, prec, precRej, punt, img, cat) => {
+  //crea los elementos html
   const contenedorDiv = document.createElement("div");
   const contenedorImg = document.createElement("div");
   const contenedorBtn = document.createElement("div");
@@ -543,6 +595,8 @@ const rellenaHtml = (cal, tit, prec, precRej, punt, img, cat) => {
   const h6 = document.createElement("h6");
   const span = document.createElement("span");
   const btn = document.createElement("btn");
+
+  //anyade estilos a los elementos del html
 
   contenedorDiv.classList.add(
     "d-flex",
@@ -563,6 +617,7 @@ const rellenaHtml = (cal, tit, prec, precRej, punt, img, cat) => {
   div.classList.add("text-light", "my-2");
   imge.classList.add("my-4", "image");
 
+  //Anyade la informacion a los datos del html
   imge.src = img;
   h6.textContent = tit;
   span.innerHTML =
@@ -575,6 +630,8 @@ const rellenaHtml = (cal, tit, prec, precRej, punt, img, cat) => {
     parseInt(((prec - precRej) / prec) * 100);
   p.textContent = "Las criticas le dan una puntuacion de  " + cal;
   btn.textContent = "Comprar";
+
+  //anyade la informacion al html y a los contenedores generados
   contenedorBtn.append(btn);
   contenedorImg.append(imge);
   div.append(span, p);
@@ -582,7 +639,3 @@ const rellenaHtml = (cal, tit, prec, precRej, punt, img, cat) => {
   contenedorDiv.append(carta);
   contenedor.append(contenedorDiv);
 };
-
-//crearemos un entrono de trabajo entornoRequestin dentro creamos tres colecciones get post y auth  enviaremos un get a httbin coje un usuario  get a reqress usuario 10  get consuma get list todos los datos
-//host tiene que estar en una variable para cada web  post registro usuario reqres  api testing scrip compruebe 200 ms por debajo o igual  otra que  compruebe la cabecera
-// tercer devuelva https captura de pantalla con resultados
