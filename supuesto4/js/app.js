@@ -1,11 +1,15 @@
 //variable que va a contener los datos de la api
 let datos = [];
+let totalTiendas;
 let tiendaActual = 0;
 //variable contenedora
 let contenedor = document.querySelector("#contenedor");
 let categoriasBotones = document.querySelector("#categoriasBotones");
+let tienda = document.querySelector("#tienda");
 
 const selectCategoria = document.querySelector("#tipoFiltro");
+
+//---------------------------------Funciones-----------------------------------------------------
 
 const obtenerDatos = async () => {
   //variables encargadas de las peticiones asincronas
@@ -148,10 +152,9 @@ const obtenerDatos = async () => {
   }
   //Con todos los datos rellenamos la tienda
   rellenaTienda();
+  //crea los botones de las tiendas
+  creaBotonesTienda();
 };
-//Llama a la funcion que hace la peticion a la api y deja cargado en memoria el resultado
-
-obtenerDatos();
 
 //Funcion que rellena la tienda segun la tienda actual
 
@@ -639,3 +642,36 @@ const rellenaHtml = (cal, tit, prec, precRej, punt, img, cat) => {
   contenedorDiv.append(carta);
   contenedor.append(contenedorDiv);
 };
+const creaBotonesTienda = () => {
+  for (let index = 0; index < datos.length; index++) {
+    const btn = document.createElement("button");
+    const div = document.createElement("div");
+
+    btn.classList.add("btn", "btn-outline-light");
+
+    div.classList.add(
+      "col-lg-3",
+      "col-md-2",
+      "col-1",
+      "d-flex",
+      "justify-content-center",
+      "aling-items-center"
+    );
+    div.append(btn);
+
+    btn.innerText = index;
+    btn.addEventListener("click", () => {
+      contenedor.innerHTML = "";
+      tiendaActual = index;
+
+      rellenaTienda();
+    });
+    tienda.append(div);
+  }
+};
+
+//---------------------------------------------------------------Ejecucion-------------------------------------------------------------------------
+
+//Llama a la funcion que hace la peticion a la api y deja cargado en memoria el resultado
+
+obtenerDatos();
