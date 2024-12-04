@@ -43,7 +43,7 @@ const obtenerDatos = async () => {
 
         //Array que va a contener las categorias
         let categories = [];
-
+        //Arrays que van a funcionar como filtro
         let accion = [
           "Collapse!",
           "Half-Life",
@@ -146,14 +146,21 @@ const obtenerDatos = async () => {
       });
     }
   }
+  //Con todos los datos rellenamos la tienda
   rellenaTienda();
 };
+//Llama a la funcion que hace la peticion a la api y deja cargado en memoria el resultado
 
 obtenerDatos();
 
+//Funcion que rellena la tienda segun la tienda actual
+
 const rellenaTienda = () => {
+  //Desestructura los datos segun la tienda que es una variable global
+
   const { storeID, storeName, juegos } = datos[tiendaActual];
 
+  //recorre los juegos de la tienda
   juegos.forEach(
     ({
       CalificacionDeTrato,
@@ -164,6 +171,7 @@ const rellenaTienda = () => {
       Imagen,
       categorias,
     }) => {
+      //creacion del html con los datos
       const contenedorDiv = document.createElement("div");
       const contenedorImg = document.createElement("div");
       const contenedorBtn = document.createElement("div");
@@ -217,20 +225,30 @@ const rellenaTienda = () => {
   );
 };
 
+//eventos para aplicar los filtros de la web
+
 selectCategoria.addEventListener("change", () => {
+  //Primera condicion que recoge los datos del indice seleccionado del select
   switch (selectCategoria.selectedIndex) {
     case 0:
+      //caso neutro
       categoriasBotones.classList.add("categorias");
       contenedor.innerHTML = "";
       rellenaTienda();
       break;
+
     case 1:
+      //caso de filtro por categorias
+
+      //selecciona los botones
       categoriasBotones.classList.remove("categorias");
       const btnAccion = document.getElementById("btnAccion");
       const btnRol = document.getElementById("btnRol");
       const btnShooter = document.getElementById("btnShooter");
       const btnPeleas = document.getElementById("btnPeleas");
       const btnEstrategia = document.getElementById("btnEstrategia");
+
+      //Anyade eventos a cada boton y ejecita el filtro para cada uno
 
       btnAccion.addEventListener("click", () => filtraPorCategoria("accion"));
       btnRol.addEventListener("click", () => filtraPorCategoria("rol"));
@@ -242,20 +260,25 @@ selectCategoria.addEventListener("change", () => {
 
       break;
     case 2:
+      //filtro por precio ascendente
       categoriasBotones.classList.add("categorias");
       filtradoRestante("precio", "asc");
       break;
     case 3:
+      //filtro por precio descendente
+
       filtradoRestante("precio", "desc");
 
       categoriasBotones.classList.add("categorias");
       break;
     case 4:
+      //filtro por calificaciones descendente
       filtradoRestante("cal", "asc");
 
       categoriasBotones.classList.add("categorias");
       break;
     case 5:
+      //filtro de calificaciones descendente
       filtradoRestante("cal", "desc");
 
       categoriasBotones.classList.add("categorias");
@@ -266,6 +289,7 @@ selectCategoria.addEventListener("change", () => {
   }
 });
 
+//funcion que filtra
 const filtraPorCategoria = (categoria) => {
   contenedor.innerHTML = "";
   const { juegos } = datos[tiendaActual];
@@ -285,62 +309,15 @@ const filtraPorCategoria = (categoria) => {
           const elementoAccion = categorias.indexOf("accion");
 
           if (elementoAccion != -1) {
-            const contenedorDiv = document.createElement("div");
-            const contenedorImg = document.createElement("div");
-            const contenedorBtn = document.createElement("div");
-
-            const carta = document.createElement("div");
-            const div = document.createElement("div");
-            const p = document.createElement("p");
-            const img = document.createElement("img");
-            const h6 = document.createElement("h6");
-            const span = document.createElement("span");
-            const btn = document.createElement("btn");
-
-            contenedorDiv.classList.add(
-              "d-flex",
-              "justify-content-center",
-              "align-items-center"
+            rellenaHtml(
+              CalificacionDeTrato,
+              Titulo,
+              Precio,
+              PrecioRebajado,
+              Puntuacion,
+              Imagen,
+              categorias
             );
-            contenedorDiv.classList.add("col-sm-6", "col-12");
-            contenedorImg.classList.add(
-              "d-flex",
-              "justify-content-center",
-              "aling-items-center"
-            );
-            contenedorBtn.classList.add("d-flex", "justify-content-end");
-            span.classList.add("text-center");
-            carta.classList.add(
-              "border",
-              "border-2",
-              "border-grey",
-              "my-2",
-              "px-2"
-            );
-            btn.classList.add("btn", "btn-secondary", "mb-2");
-            h6.classList.add("text-light", "mb-2", "text-center");
-            div.classList.add("text-light", "my-2");
-            img.classList.add("my-4", "image");
-
-            img.src = Imagen;
-            h6.textContent = Titulo;
-            span.innerHTML =
-              "Precio anterior: " +
-              Precio +
-              "$<br> Precio rebajado " +
-              PrecioRebajado +
-              "$" +
-              "<br>Porcentaje de ahorro  " +
-              parseInt(((Precio - PrecioRebajado) / Precio) * 100);
-            p.textContent =
-              "Las criticas le dan una puntuacion de  " + Puntuacion;
-            btn.textContent = "Comprar";
-            contenedorBtn.append(btn);
-            contenedorImg.append(img);
-            div.append(span, p);
-            carta.append(contenedorImg, h6, div, contenedorBtn);
-            contenedorDiv.append(carta);
-            contenedor.append(contenedorDiv);
           }
         }
       );
@@ -359,62 +336,15 @@ const filtraPorCategoria = (categoria) => {
           const elementoAccion = categorias.indexOf("rol");
 
           if (elementoAccion != -1) {
-            const contenedorDiv = document.createElement("div");
-            const contenedorImg = document.createElement("div");
-            const contenedorBtn = document.createElement("div");
-
-            const carta = document.createElement("div");
-            const div = document.createElement("div");
-            const p = document.createElement("p");
-            const img = document.createElement("img");
-            const h6 = document.createElement("h6");
-            const span = document.createElement("span");
-            const btn = document.createElement("btn");
-
-            contenedorDiv.classList.add(
-              "d-flex",
-              "justify-content-center",
-              "align-items-center"
+            rellenaHtml(
+              CalificacionDeTrato,
+              Titulo,
+              Precio,
+              PrecioRebajado,
+              Puntuacion,
+              Imagen,
+              categorias
             );
-            contenedorDiv.classList.add("col-sm-6", "col-12");
-            contenedorImg.classList.add(
-              "d-flex",
-              "justify-content-center",
-              "aling-items-center"
-            );
-            contenedorBtn.classList.add("d-flex", "justify-content-end");
-            span.classList.add("text-center");
-            carta.classList.add(
-              "border",
-              "border-2",
-              "border-grey",
-              "my-2",
-              "px-2"
-            );
-            btn.classList.add("btn", "btn-secondary", "mb-2");
-            h6.classList.add("text-light", "mb-2", "text-center");
-            div.classList.add("text-light", "my-2");
-            img.classList.add("my-4", "image");
-
-            img.src = Imagen;
-            h6.textContent = Titulo;
-            span.innerHTML =
-              "Precio anterior: " +
-              Precio +
-              "$<br> Precio rebajado " +
-              PrecioRebajado +
-              "$" +
-              "<br>Porcentaje de ahorro  " +
-              parseInt(((Precio - PrecioRebajado) / Precio) * 100);
-            p.textContent =
-              "Las criticas le dan una puntuacion de  " + Puntuacion;
-            btn.textContent = "Comprar";
-            contenedorBtn.append(btn);
-            contenedorImg.append(img);
-            div.append(span, p);
-            carta.append(contenedorImg, h6, div, contenedorBtn);
-            contenedorDiv.append(carta);
-            contenedor.append(contenedorDiv);
           }
         }
       );
@@ -433,63 +363,15 @@ const filtraPorCategoria = (categoria) => {
           const elementoAccion = categorias.indexOf("shooter");
 
           if (elementoAccion != -1) {
-            console.log(categorias);
-            const contenedorDiv = document.createElement("div");
-            const contenedorImg = document.createElement("div");
-            const contenedorBtn = document.createElement("div");
-
-            const carta = document.createElement("div");
-            const div = document.createElement("div");
-            const p = document.createElement("p");
-            const img = document.createElement("img");
-            const h6 = document.createElement("h6");
-            const span = document.createElement("span");
-            const btn = document.createElement("btn");
-
-            contenedorDiv.classList.add(
-              "d-flex",
-              "justify-content-center",
-              "align-items-center"
+            rellenaHtml(
+              CalificacionDeTrato,
+              Titulo,
+              Precio,
+              PrecioRebajado,
+              Puntuacion,
+              Imagen,
+              categorias
             );
-            contenedorDiv.classList.add("col-sm-6", "col-12");
-            contenedorImg.classList.add(
-              "d-flex",
-              "justify-content-center",
-              "aling-items-center"
-            );
-            contenedorBtn.classList.add("d-flex", "justify-content-end");
-            span.classList.add("text-center");
-            carta.classList.add(
-              "border",
-              "border-2",
-              "border-grey",
-              "my-2",
-              "px-2"
-            );
-            btn.classList.add("btn", "btn-secondary", "mb-2");
-            h6.classList.add("text-light", "mb-2", "text-center");
-            div.classList.add("text-light", "my-2");
-            img.classList.add("my-4", "image");
-
-            img.src = Imagen;
-            h6.textContent = Titulo;
-            span.innerHTML =
-              "Precio anterior: " +
-              Precio +
-              "$<br> Precio rebajado " +
-              PrecioRebajado +
-              "$" +
-              "<br>Porcentaje de ahorro  " +
-              parseInt(((Precio - PrecioRebajado) / Precio) * 100);
-            p.textContent =
-              "Las criticas le dan una puntuacion de  " + Puntuacion;
-            btn.textContent = "Comprar";
-            contenedorBtn.append(btn);
-            contenedorImg.append(img);
-            div.append(span, p);
-            carta.append(contenedorImg, h6, div, contenedorBtn);
-            contenedorDiv.append(carta);
-            contenedor.append(contenedorDiv);
           }
         }
       );
@@ -508,63 +390,15 @@ const filtraPorCategoria = (categoria) => {
           const elementoAccion = categorias.indexOf("peleas");
 
           if (elementoAccion != -1) {
-            console.log(categorias);
-            const contenedorDiv = document.createElement("div");
-            const contenedorImg = document.createElement("div");
-            const contenedorBtn = document.createElement("div");
-
-            const carta = document.createElement("div");
-            const div = document.createElement("div");
-            const p = document.createElement("p");
-            const img = document.createElement("img");
-            const h6 = document.createElement("h6");
-            const span = document.createElement("span");
-            const btn = document.createElement("btn");
-
-            contenedorDiv.classList.add(
-              "d-flex",
-              "justify-content-center",
-              "align-items-center"
+            rellenaHtml(
+              CalificacionDeTrato,
+              Titulo,
+              Precio,
+              PrecioRebajado,
+              Puntuacion,
+              Imagen,
+              categorias
             );
-            contenedorDiv.classList.add("col-sm-6", "col-12");
-            contenedorImg.classList.add(
-              "d-flex",
-              "justify-content-center",
-              "aling-items-center"
-            );
-            contenedorBtn.classList.add("d-flex", "justify-content-end");
-            span.classList.add("text-center");
-            carta.classList.add(
-              "border",
-              "border-2",
-              "border-grey",
-              "my-2",
-              "px-2"
-            );
-            btn.classList.add("btn", "btn-secondary", "mb-2");
-            h6.classList.add("text-light", "mb-2", "text-center");
-            div.classList.add("text-light", "my-2");
-            img.classList.add("my-4", "image");
-
-            img.src = Imagen;
-            h6.textContent = Titulo;
-            span.innerHTML =
-              "Precio anterior: " +
-              Precio +
-              "$<br> Precio rebajado " +
-              PrecioRebajado +
-              "$" +
-              "<br>Porcentaje de ahorro  " +
-              parseInt(((Precio - PrecioRebajado) / Precio) * 100);
-            p.textContent =
-              "Las criticas le dan una puntuacion de  " + Puntuacion;
-            btn.textContent = "Comprar";
-            contenedorBtn.append(btn);
-            contenedorImg.append(img);
-            div.append(span, p);
-            carta.append(contenedorImg, h6, div, contenedorBtn);
-            contenedorDiv.append(carta);
-            contenedor.append(contenedorDiv);
           }
         }
       );
@@ -583,63 +417,15 @@ const filtraPorCategoria = (categoria) => {
           const elementoAccion = categorias.indexOf("estrategia");
 
           if (elementoAccion != -1) {
-            console.log(categorias);
-            const contenedorDiv = document.createElement("div");
-            const contenedorImg = document.createElement("div");
-            const contenedorBtn = document.createElement("div");
-
-            const carta = document.createElement("div");
-            const div = document.createElement("div");
-            const p = document.createElement("p");
-            const img = document.createElement("img");
-            const h6 = document.createElement("h6");
-            const span = document.createElement("span");
-            const btn = document.createElement("btn");
-
-            contenedorDiv.classList.add(
-              "d-flex",
-              "justify-content-center",
-              "align-items-center"
+            rellenaHtml(
+              CalificacionDeTrato,
+              Titulo,
+              Precio,
+              PrecioRebajado,
+              Puntuacion,
+              Imagen,
+              categorias
             );
-            contenedorDiv.classList.add("col-sm-6", "col-12");
-            contenedorImg.classList.add(
-              "d-flex",
-              "justify-content-center",
-              "aling-items-center"
-            );
-            contenedorBtn.classList.add("d-flex", "justify-content-end");
-            span.classList.add("text-center");
-            carta.classList.add(
-              "border",
-              "border-2",
-              "border-grey",
-              "my-2",
-              "px-2"
-            );
-            btn.classList.add("btn", "btn-secondary", "mb-2");
-            h6.classList.add("text-light", "mb-2", "text-center");
-            div.classList.add("text-light", "my-2");
-            img.classList.add("my-4", "image");
-
-            img.src = Imagen;
-            h6.textContent = Titulo;
-            span.innerHTML =
-              "Precio anterior: " +
-              Precio +
-              "$<br> Precio rebajado " +
-              PrecioRebajado +
-              "$" +
-              "<br>Porcentaje de ahorro  " +
-              parseInt(((Precio - PrecioRebajado) / Precio) * 100);
-            p.textContent =
-              "Las criticas le dan una puntuacion de  " + Puntuacion;
-            btn.textContent = "Comprar";
-            contenedorBtn.append(btn);
-            contenedorImg.append(img);
-            div.append(span, p);
-            carta.append(contenedorImg, h6, div, contenedorBtn);
-            contenedorDiv.append(carta);
-            contenedor.append(contenedorDiv);
           }
         }
       );
@@ -689,7 +475,6 @@ const filtradoRestante = (tipo, modo) => {
                 }
               }
 
-              console.log(arrayOrdenado);
               break;
             case "desc":
               for (let i = 0; i < arrayOrdenado.length; i++) {
@@ -701,11 +486,11 @@ const filtradoRestante = (tipo, modo) => {
                   }
                 }
               }
-              console.log(arrayOrdenado);
               break;
             default:
               break;
           }
+
           break;
         case "cal":
           switch (modo) {
@@ -720,7 +505,6 @@ const filtradoRestante = (tipo, modo) => {
                 }
               }
 
-              console.log(arrayOrdenado);
               break;
             case "desc":
               for (let i = 0; i < arrayOrdenado.length; i++) {
@@ -732,7 +516,6 @@ const filtradoRestante = (tipo, modo) => {
                   }
                 }
               }
-              console.log(arrayOrdenado);
               break;
             default:
               break;
@@ -743,4 +526,63 @@ const filtradoRestante = (tipo, modo) => {
       }
     }
   );
+  arrayOrdenado.forEach(({ cal, tit, prec, precRej, punt, img, cat }) =>
+    rellenaHtml(cal, tit, prec, precRej, punt, img, cat)
+  );
 };
+
+const rellenaHtml = (cal, tit, prec, precRej, punt, img, cat) => {
+  const contenedorDiv = document.createElement("div");
+  const contenedorImg = document.createElement("div");
+  const contenedorBtn = document.createElement("div");
+
+  const carta = document.createElement("div");
+  const div = document.createElement("div");
+  const p = document.createElement("p");
+  const imge = document.createElement("img");
+  const h6 = document.createElement("h6");
+  const span = document.createElement("span");
+  const btn = document.createElement("btn");
+
+  contenedorDiv.classList.add(
+    "d-flex",
+    "justify-content-center",
+    "align-items-center"
+  );
+  contenedorDiv.classList.add("col-sm-6", "col-12");
+  contenedorImg.classList.add(
+    "d-flex",
+    "justify-content-center",
+    "aling-items-center"
+  );
+  contenedorBtn.classList.add("d-flex", "justify-content-end");
+  span.classList.add("text-center");
+  carta.classList.add("border", "border-2", "border-grey", "my-2", "px-2");
+  btn.classList.add("btn", "btn-secondary", "mb-2");
+  h6.classList.add("text-light", "mb-2", "text-center");
+  div.classList.add("text-light", "my-2");
+  imge.classList.add("my-4", "image");
+
+  imge.src = img;
+  h6.textContent = tit;
+  span.innerHTML =
+    "Precio anterior: " +
+    prec +
+    "$<br> Precio rebajado " +
+    precRej +
+    "$" +
+    "<br>Porcentaje de ahorro  " +
+    parseInt(((prec - precRej) / prec) * 100);
+  p.textContent = "Las criticas le dan una puntuacion de  " + cal;
+  btn.textContent = "Comprar";
+  contenedorBtn.append(btn);
+  contenedorImg.append(imge);
+  div.append(span, p);
+  carta.append(contenedorImg, h6, div, contenedorBtn);
+  contenedorDiv.append(carta);
+  contenedor.append(contenedorDiv);
+};
+
+//crearemos un entrono de trabajo entornoRequestin dentro creamos tres colecciones get post y auth  enviaremos un get a httbin coje un usuario  get a reqress usuario 10  get consuma get list todos los datos
+//host tiene que estar en una variable para cada web  post registro usuario reqres  api testing scrip compruebe 200 ms por debajo o igual  otra que  compruebe la cabecera
+// tercer devuelva https captura de pantalla con resultados
