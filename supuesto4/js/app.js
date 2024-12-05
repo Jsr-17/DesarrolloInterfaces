@@ -2,6 +2,7 @@
 let datos = [];
 let totalTiendas;
 let tiendaActual = 0;
+let pagina = 1;
 //variable contenedora
 let contenedor = document.querySelector("#contenedor");
 let categoriasBotones = document.querySelector("#categoriasBotones");
@@ -16,7 +17,7 @@ const obtenerDatos = async () => {
   const resp = await fetch("https://www.cheapshark.com/api/1.0/stores");
   const data = await resp.json();
   //
-  for (let index = 0; index < 3; index++) {
+  for (let index = 0; index < data.length; index++) {
     //Cambiarlo luego por el total
     const { storeID, storeName, isActive } = data[index];
 
@@ -65,6 +66,7 @@ const obtenerDatos = async () => {
           "Just Cause",
           "Thief",
           "Borderlands",
+          "Kingdom Come",
         ];
 
         let shooter = [
@@ -159,12 +161,33 @@ const obtenerDatos = async () => {
 //Funcion que rellena la tienda segun la tienda actual
 
 const rellenaTienda = () => {
+  contenedor.innerHTML = "";
   //Desestructura los datos segun la tienda que es una variable global
 
   const { storeID, storeName, juegos } = datos[tiendaActual];
 
+  let array = [];
+
+  if (pagina == 1) {
+    for (let index = 0; index < 15; index++) {
+      array = [...array, juegos[index]];
+    }
+  } else if (pagina == 2) {
+    for (let index = 15; index < 30; index++) {
+      array = [...array, juegos[index]];
+    }
+  } else if (pagina == 3) {
+    for (let index = 30; index < 45; index++) {
+      array = [...array, juegos[index]];
+    }
+  } else if (pagina == 4) {
+    for (let index = 45; index < 60; index++) {
+      array = [...array, juegos[index]];
+    }
+  }
+
   //recorre los juegos de la tienda
-  juegos.forEach(
+  array.forEach(
     ({
       CalificacionDeTrato,
       Titulo,
@@ -226,6 +249,17 @@ const rellenaTienda = () => {
       contenedor.append(contenedorDiv);
     }
   );
+  for (let index = 1; index <= 4; index++) {
+    const btn = document.createElement("btn");
+    btn.textContent = index;
+
+    btn.classList.add("btn", "btn-outline-light");
+    btn.addEventListener("click", () => {
+      pagina = index;
+      rellenaTienda();
+    });
+    contenedor.append(btn);
+  }
 };
 
 //eventos para aplicar los filtros de la web
@@ -579,9 +613,42 @@ const filtradoRestante = (tipo, modo) => {
     }
   );
   //Por ultimo recorre el array creado para meter dentro del html los datos del json ordenado segun el filtro
-  arrayOrdenado.forEach(({ cal, tit, prec, precRej, punt, img, cat }) =>
+
+  let array = [];
+
+  if (pagina == 1) {
+    for (let index = 0; index < 15; index++) {
+      array = [...array, arrayOrdenado[index]];
+    }
+  } else if (pagina == 2) {
+    for (let index = 15; index < 30; index++) {
+      array = [...array, arrayOrdenado[index]];
+    }
+  } else if (pagina == 3) {
+    for (let index = 30; index < 45; index++) {
+      array = [...array, arrayOrdenado[index]];
+    }
+  } else if (pagina == 4) {
+    for (let index = 45; index < 60; index++) {
+      array = [...array, arrayOrdenado[index]];
+    }
+  }
+
+  array.forEach(({ cal, tit, prec, precRej, punt, img, cat }) =>
     rellenaHtml(cal, tit, prec, precRej, punt, img, cat)
   );
+
+  for (let index = 1; index <= 4; index++) {
+    const btn = document.createElement("btn");
+    btn.textContent = index;
+
+    btn.classList.add("btn", "btn-outline-light");
+    btn.addEventListener("click", () => {
+      pagina = index;
+      filtradoRestante(tipo, modo);
+    });
+    contenedor.append(btn);
+  }
 };
 
 //funcion que se encarga de rellenar de manera dinamica el html
@@ -647,7 +714,7 @@ const creaBotonesTienda = () => {
     const btn = document.createElement("button");
     const div = document.createElement("div");
 
-    btn.classList.add("btn", "btn-outline-light");
+    btn.classList.add("btn", "btn-outline-light", "my-2");
 
     div.classList.add(
       "col-lg-3",
@@ -658,8 +725,10 @@ const creaBotonesTienda = () => {
       "aling-items-center"
     );
     div.append(btn);
+    const { storeID, storeName } = datos[index];
 
-    btn.innerText = index;
+    btn.innerText = storeName;
+
     btn.addEventListener("click", () => {
       contenedor.innerHTML = "";
       tiendaActual = index;
@@ -675,3 +744,5 @@ const creaBotonesTienda = () => {
 //Llama a la funcion que hace la peticion a la api y deja cargado en memoria el resultado
 
 obtenerDatos();
+
+//Falta que te lleve a la tienda de enlace comentar el codigo anyadir los demas elementos a las categorias y hacer el documento
